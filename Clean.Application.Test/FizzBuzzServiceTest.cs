@@ -36,6 +36,21 @@ namespace Clean.Application.Test
         [InlineData(10)]
         [InlineData(20)]
         [InlineData(25)]
+        public void SetFizz_ShouldNotSetDictionary(int number)
+        {
+            // Act
+            _service.SetFizz(number);
+            var list = _service._fizzbuzz.ToList();
+
+            //Assert
+            Assert.False(list.Where(x => x.Value == "fizz").Any());
+        }
+
+        [Theory]
+        [InlineData(5)]
+        [InlineData(10)]
+        [InlineData(20)]
+        [InlineData(25)]
         public void SetBuzz_ShouldSetDictionary(int number)
         {
             //Act
@@ -43,6 +58,21 @@ namespace Clean.Application.Test
             var list = _service._fizzbuzz.ToList();
             //Assert
             Assert.True(list.Where(x => x.Value == "buzz").Any());
+        }
+
+        [Theory]
+        [InlineData(3)]
+        [InlineData(6)]
+        [InlineData(9)]
+        [InlineData(12)]
+        public void SetBuzz_ShouldNotSetDictionary(int number)
+        {
+            // Act
+            _service.SetBuzz(number);
+            var list = _service._fizzbuzz.ToList();
+
+            //Assert
+            Assert.False(list.Where(x => x.Value == "fizz").Any());
         }
 
         [Theory]
@@ -61,5 +91,28 @@ namespace Clean.Application.Test
             //Assert
             Assert.True(list.Where(x => x.Value == "fizzbuzz").Any());
         }
+
+        [Theory]
+        [InlineData(3)]
+        [InlineData(5)]
+        [InlineData(6)]
+        [InlineData(9)]
+        [InlineData(10)]
+        [InlineData(12)]
+        [InlineData(20)]
+        [InlineData(25)]
+        public void SetFizzBuzz_ShouldNotSetDictionary(int number)
+        {
+            //Act
+            _service.SetFizz(number);
+            _service.SetBuzz(number);
+
+            var list = _service._fizzbuzz.ToList();
+
+            //Assert
+            Assert.False(list.Where(x => x.Value == "fizzbuzz").Any());
+        }
+
+
     }
 }
