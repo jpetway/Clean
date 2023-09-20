@@ -9,7 +9,7 @@ namespace Clean.Application.Services
 {
     public class FizzBuzzService : IFizzBuzzService
     {
-        public required Dictionary<int, string> _fizzbuzz = new Dictionary<int, string>();
+        public Dictionary<int, string> _fizzbuzz = new Dictionary<int, string>();
 
         public Dictionary<int, string> GetFizzBuzz()
         {

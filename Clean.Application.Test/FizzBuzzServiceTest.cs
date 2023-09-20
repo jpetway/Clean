@@ -11,9 +11,9 @@ namespace Clean.Application.Test
     {
         private readonly FizzBuzzService _service;
 
-        public FizzBuzzServiceTest(FizzBuzzService service)
+        public FizzBuzzServiceTest()
         {
-            _service = service;
+            _service = new FizzBuzzService();
         }
 
         [Theory]
