@@ -36,7 +36,7 @@ namespace Clean.Application.Services
 
         public void LoadFizzBuzz(int number, string fizzBuzz) 
         {
-            if(/*_fizzbuzz.Count > 1 && */_fizzbuzz.ContainsKey(number)) _fizzbuzz[number] = $"{_fizzbuzz[number]}{fizzBuzz}";
+            if(_fizzbuzz.ContainsKey(number)) _fizzbuzz[number] = $"{_fizzbuzz[number]}{fizzBuzz}";
             else _fizzbuzz.Add(number, fizzBuzz);
         }
     }
