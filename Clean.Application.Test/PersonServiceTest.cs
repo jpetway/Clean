@@ -8,10 +8,12 @@ using System;
 public class PersonServiceTests
 {
     private readonly Mock<IPersonRepository> _mockRepo;
+    private readonly PersonService _personService;
 
     public PersonServiceTests()
     {
         _mockRepo = new Mock<IPersonRepository>();
+        _personService = new PersonService(_mockRepo.Object );
     }
 
     [Fact]
@@ -21,10 +23,8 @@ public class PersonServiceTests
         var person = new PersonEntity { Id = 1, FirstName = "John", LastName = "Doe" };
         _mockRepo.Setup(repo => repo.GetById(1)).Returns(person);
 
-        var service = new PersonService(_mockRepo.Object);
-
         // Act
-        var result = await service.GetByIdAsync(1);
+        var result = await _personService.GetByIdAsync(1);
 
         // Assert
         _mockRepo.Verify(repo => repo.GetById(1), Times.Once());
@@ -37,10 +37,8 @@ public class PersonServiceTests
         // Arrange
         _mockRepo.Setup(repo => repo.GetById(999)).Returns((PersonEntity)null);
 
-        var service = new PersonService(_mockRepo.Object);
-
         // Act & Assert
-        await Assert.ThrowsAsync<NullReferenceException>(() => service.GetByIdAsync(999));
+        await Assert.ThrowsAsync<NullReferenceException>(() => _personService.GetByIdAsync(999));
     }
 
 
@@ -51,10 +49,8 @@ public class PersonServiceTests
         var persons = new[] { new PersonEntity { Id = 1, FirstName = "John", LastName = "Doe" } };
         _mockRepo.Setup(repo => repo.GetAll()).Returns(persons);
 
-        var service = new PersonService(_mockRepo.Object);
-
         // Act
-        var result = await service.GetAllAsync();
+        var result = await _personService.GetAllAsync();
 
         // Assert
         _mockRepo.Verify(repo => repo.GetAll(), Times.Once());
@@ -67,10 +63,8 @@ public class PersonServiceTests
         // Arrange
         _mockRepo.Setup(repo => repo.GetAll()).Returns(Enumerable.Empty<PersonEntity>());
 
-        var service = new PersonService(_mockRepo.Object);
-
         // Act
-        var result = await service.GetAllAsync();
+        var result = await _personService.GetAllAsync();
 
         // Assert
         _mockRepo.Verify(repo => repo.GetAll(), Times.Once());
@@ -84,10 +78,8 @@ public class PersonServiceTests
         var personDto = new PersonDto { FirstName = "John", LastName = "Doe" };
         _mockRepo.Setup(repo => repo.Add(It.IsAny<PersonEntity>())).Returns(Task.CompletedTask);
 
-        var service = new PersonService(_mockRepo.Object);
-
         // Act
-        await service.AddAsync(personDto);
+        await _personService.AddAsync(personDto);
 
         // Assert
         _mockRepo.Verify(repo => repo.Add(It.IsAny<PersonEntity>()), Times.Once());
@@ -99,10 +91,8 @@ public class PersonServiceTests
         // Arrange
         _mockRepo.Setup(repo => repo.Add(null)).Returns(Task.CompletedTask);
 
-        var service = new PersonService(_mockRepo.Object);
-
         // Act & Assert
-        await Assert.ThrowsAsync<NullReferenceException>(() => service.AddAsync(null));
+        await Assert.ThrowsAsync<NullReferenceException>(() => _personService.AddAsync(null));
     }
 
     [Fact]
@@ -112,10 +102,8 @@ public class PersonServiceTests
         var personDto = new PersonDto { Id = 1, FirstName = "John", LastName = "Doe" };
         _mockRepo.Setup(repo => repo.Update(It.IsAny<PersonEntity>())).Returns(Task.CompletedTask);
 
-        var service = new PersonService(_mockRepo.Object);
-
         // Act
-        await service.UpdateAsync(personDto);
+        await _personService.UpdateAsync(personDto);
 
         // Assert
         _mockRepo.Verify(repo => repo.Update(It.IsAny<PersonEntity>()), Times.Once());
@@ -127,10 +115,8 @@ public class PersonServiceTests
         // Arrange
         _mockRepo.Setup(repo => repo.Update(null)).Returns(Task.CompletedTask);
 
-        var service = new PersonService(_mockRepo.Object);
-
         // Act & Assert
-        await Assert.ThrowsAsync<NullReferenceException>(() => service.UpdateAsync(null));
+        await Assert.ThrowsAsync<NullReferenceException>(() => _personService.UpdateAsync(null));
     }
 
     [Fact]
@@ -141,10 +127,8 @@ public class PersonServiceTests
         _mockRepo.Setup(repo => repo.Add(It.IsAny<PersonEntity>())).Returns(Task.CompletedTask);
         _mockRepo.Setup(repo => repo.Delete(1)).Returns(Task.CompletedTask);
 
-        var service = new PersonService(_mockRepo.Object);
-
         // Act
-        await service.DeleteAsync(1);
+        await _personService.DeleteAsync(1);
 
         // Assert
         _mockRepo.Verify(repo => repo.Delete(1), Times.Once());
@@ -156,11 +140,8 @@ public class PersonServiceTests
         // Arrange
         _mockRepo.Setup(repo => repo.Delete(999)).Returns(Task.CompletedTask);
         
-
-        var service = new PersonService(_mockRepo.Object);
-
         // Act & Assert
-        await Assert.ThrowsAsync<NullReferenceException>(() => service.DeleteAsync(999));
+        await Assert.ThrowsAsync<NullReferenceException>(() => _personService.DeleteAsync(999));
     }
 
 }
