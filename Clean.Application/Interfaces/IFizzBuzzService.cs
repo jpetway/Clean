@@ -8,6 +8,6 @@ namespace Clean.Application.Interfaces
 {
     public interface IFizzBuzzService
     {
-        public Dictionary<int, string> GetFizzBuzz();
+        Dictionary<int, string> GetFizzBuzz();
     }
 }
