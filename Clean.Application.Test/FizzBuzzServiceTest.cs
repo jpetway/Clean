@@ -57,6 +57,7 @@ namespace Clean.Application.Test
             _service.SetBuzz(number);
             
             var list = _service._fizzbuzz.ToList();
+
             //Assert
             Assert.True(list.Where(x => x.Value == "fizzbuzz").Any());
         }
