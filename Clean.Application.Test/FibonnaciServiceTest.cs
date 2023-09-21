@@ -12,38 +12,40 @@ namespace Clean.Application.Test
     {
         private readonly FibonacciService _service;
         
-        public FibonnaciServiceTest(FibonacciService service)
+        public FibonnaciServiceTest()
         {
-            _service = service;
-        }
-
-        [Theory]
-        [InlineData(3,3)]
-        [InlineData(4,5)]
-        [InlineData(5,8)]
-        public void GetFibonacciValue_ShouldReturnExpectedOutput(int n, int expectedValue)
-        {
-            //Arrange
-            int output;
-
-            //Act
-            output = _service.GetFibonacciValue(n);
-
-            //Assert
-            Assert.Equal(expectedValue, output); 
+            _service = new FibonacciService();
         }
 
         [Theory]
         [InlineData(1, 1)]
         [InlineData(3, 3)]
         [InlineData(5, 8)]
-        public void LoadFibonacciList(int n, int value)
+        public void LoadFibonacciList_ShouldAddListItem(int n, int value)
         {
             //Act
             _service.LoadFibonacciList(n, value);
 
             //Assert
             Assert.Contains(_service._fibonacciList, x => x.Key == n &&  x.Value == value);
+        }
+
+        [Theory]
+        [InlineData(1,1)]
+        [InlineData(2,2)]
+        [InlineData(3,3)]
+        [InlineData(4,5)]
+        [InlineData(5,8)]
+        [InlineData(6,13)]
+        [InlineData(7,21)]
+        [InlineData(8,34)]
+        public void FibonacciNPosition_ShouldReturnFibonacciValue(int n, int expectedValue)
+        {
+            //Act
+            var nValue = _service.FibonacciNPosition(n);
+
+            //Assert
+            Assert.Equal(expectedValue, nValue.Value);
         }
     }
 }

@@ -18,6 +18,7 @@ builder.Services.AddDbContext<CleanDbContext>(options => options.UseSqlite(build
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddTransient<IFizzBuzzService, FizzBuzzService>();
+builder.Services.AddTransient<IFibonacciService, FibonacciService>();
 
 
 var app = builder.Build();

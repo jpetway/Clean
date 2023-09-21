@@ -10,7 +10,5 @@ namespace Clean.Application.Interfaces
     public interface IFibonacciService
     {
         FibonacciDto FibonacciNPosition(int n);
-        int GetFibonacciValue(int n);
-        void LoadFibonacciList(int n, int value);
     }
 }

@@ -13,18 +13,31 @@ namespace Clean.Application.Services
         public List<FibonacciDto> _fibonacciList = new List<FibonacciDto>();
         public FibonacciDto FibonacciNPosition(int n)
         {
-            throw new NotImplementedException();
+            for (int i = 1; i <= n; i++)
+            {
+                var value = GetFibonacciValue(i);
+                LoadFibonacciList(i, value);
+            }
+
+            var returnItem = _fibonacciList.OrderByDescending(x => x.Key).FirstOrDefault();
+
+            return returnItem;
         }
 
-        public int GetFibonacciValue(int n)
+        private long GetFibonacciValue(int n)
         {
             if (_fibonacciList.Count() < 3) return n;
-            else return _fibonacciList.Where(x => x.Key < n && x.Key >= (n - 2)).Sum(x => x.Value);
+            else
+            {
+                var skip = (n - 2) - 1;
+                var previousTwo = _fibonacciList.Skip(skip).Take(2);
+                return previousTwo.Sum(x => x.Value);
+            };
         }
 
-        public void LoadFibonacciList(int n, int value)
+        public void LoadFibonacciList(int n, long value)
         {
-            throw new NotImplementedException();
+            _fibonacciList.Add(new FibonacciDto { Key = n, Value = value });
         }
     }
 }
