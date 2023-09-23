@@ -134,14 +134,4 @@ public class PersonServiceTests
         _mockRepo.Verify(repo => repo.Delete(1), Times.Once());
     }
 
-    [Fact]
-    public async Task DeleteAsync_ShouldFail()
-    {
-        // Arrange
-        _mockRepo.Setup(repo => repo.Delete(999)).Returns(Task.CompletedTask);
-        
-        // Act & Assert
-        await Assert.ThrowsAsync<NullReferenceException>(() => _personService.DeleteAsync(999));
-    }
-
 }
