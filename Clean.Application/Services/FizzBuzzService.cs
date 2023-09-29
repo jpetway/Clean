@@ -5,39 +5,38 @@ using System.Text;
 using System.Threading.Tasks;
 using Clean.Application.Interfaces;
 
-namespace Clean.Application.Services
+namespace Clean.Application.Services;
+
+public class FizzBuzzService : IFizzBuzzService
 {
-    public class FizzBuzzService : IFizzBuzzService
+    public Dictionary<int, string> _fizzbuzz = new Dictionary<int, string>();
+
+    public Dictionary<int, string> GetFizzBuzz()
     {
-        public Dictionary<int, string> _fizzbuzz = new Dictionary<int, string>();
+        for (int i = 1; i <= 100; i++)
+        {
+            SetFizz(i);
+            SetBuzz(i);
+        }
+        return _fizzbuzz;
+    }
+    public void SetFizz(int number)
+    {
+        if (IsDivisibleByX(3,number)) LoadFizzBuzz(number, "fizz");
+    }
+    public void SetBuzz(int number)
+    {
+        if (IsDivisibleByX(5, number)) LoadFizzBuzz(number, "buzz");
+    }
+    public static bool IsDivisibleByX(int divisible, int number)
+    {
+        var returnVal = number % divisible == 0;
+        return returnVal;
+    }
 
-        public Dictionary<int, string> GetFizzBuzz()
-        {
-            for (int i = 1; i <= 100; i++)
-            {
-                SetFizz(i);
-                SetBuzz(i);
-            }
-            return _fizzbuzz;
-        }
-        public void SetFizz(int number)
-        {
-            if (IsDivisibleByX(3,number)) LoadFizzBuzz(number, "fizz");
-        }
-        public void SetBuzz(int number)
-        {
-            if (IsDivisibleByX(5, number)) LoadFizzBuzz(number, "buzz");
-        }
-        public static bool IsDivisibleByX(int divisible, int number)
-        {
-            var returnVal = number % divisible == 0;
-            return returnVal;
-        }
-
-        public void LoadFizzBuzz(int number, string fizzBuzz) 
-        {
-            if(_fizzbuzz.ContainsKey(number)) _fizzbuzz[number] = $"{_fizzbuzz[number]}{fizzBuzz}";
-            else _fizzbuzz.Add(number, fizzBuzz);
-        }
+    public void LoadFizzBuzz(int number, string fizzBuzz) 
+    {
+        if(_fizzbuzz.ContainsKey(number)) _fizzbuzz[number] = $"{_fizzbuzz[number]}{fizzBuzz}";
+        else _fizzbuzz.Add(number, fizzBuzz);
     }
 }

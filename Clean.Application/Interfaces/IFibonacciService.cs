@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clean.Application.Interfaces
+namespace Clean.Application.Interfaces;
+
+public interface IFibonacciService
 {
-    public interface IFibonacciService
-    {
-        FibonacciDto FibonacciNPosition(int n);
-    }
+    FibonacciDto FibonacciNPosition(int n);
 }

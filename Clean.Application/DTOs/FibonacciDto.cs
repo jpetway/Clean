@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clean.Application.DTOs
+namespace Clean.Application.DTOs;
+
+public class FibonacciDto
 {
-    public class FibonacciDto
-    {
-        public int Key { get; set; }
-        public long Value { get; set; }
-    }
+    public int Key { get; set; }
+    public long Value { get; set; }
 }

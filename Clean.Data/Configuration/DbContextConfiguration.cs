@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clean.Data.Configuration
+namespace Clean.Data.Configuration;
+
+internal class DbContextConfiguration
 {
-    internal class DbContextConfiguration
-    {
-    }
 }

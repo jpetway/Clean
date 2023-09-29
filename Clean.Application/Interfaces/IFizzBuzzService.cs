@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clean.Application.Interfaces
+namespace Clean.Application.Interfaces;
+
+public interface IFizzBuzzService
 {
-    public interface IFizzBuzzService
-    {
-        Dictionary<int, string> GetFizzBuzz();
-    }
+    Dictionary<int, string> GetFizzBuzz();
 }

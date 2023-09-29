@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clean.Domain.Interfaces
-{
-    public interface IPersonRepository : IGenericRepository<PersonEntity>
-    {        
-    }
+namespace Clean.Domain.Interfaces;
+
+public interface IPersonRepository : IGenericRepository<PersonEntity>
+{        
 }
