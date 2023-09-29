@@ -24,7 +24,7 @@ public class PersonRepository : IPersonRepository
 
     public async Task Delete(int id)
     {
-        var person = GetById(id);
+        var person = await GetById(id);
         if (person != null)
         {
             person.IsDeleted = true;
@@ -34,13 +34,13 @@ public class PersonRepository : IPersonRepository
         else { throw new Exception(); }
     }
 
-    public IEnumerable<PersonEntity> GetAll() => _context.Person.Where(p => !p.IsDeleted).ToList();
+    public IEnumerable<PersonEntity> GetAll() => _context.Person.Where(p => !p.IsDeleted);
 
-    public PersonEntity GetById(int id) => _context.Person.Find(id);
+    public async Task<PersonEntity> GetById(int id) => await _context.Person.FindAsync(id);
 
     public async Task Update(PersonEntity entity)
     {
-        var person = GetById(entity.Id);
+        var person = await GetById(entity.Id);
         person.FirstName = entity.FirstName;
         person.LastName = entity.LastName;
         

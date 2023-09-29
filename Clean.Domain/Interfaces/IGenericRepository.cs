@@ -9,7 +9,7 @@ namespace Clean.Domain.Interfaces;
 
 public interface IGenericRepository<T> where T : class
 {
-    T GetById (int id);
+    Task<T> GetById (int id);
     IEnumerable<T> GetAll();
     Task Add(T entity);
     Task Update(T entity);
