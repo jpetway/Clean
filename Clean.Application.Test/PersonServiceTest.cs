@@ -4,6 +4,7 @@ using Clean.Application.DTOs;
 using Clean.Domain.Entities;
 using Clean.Domain.Interfaces;
 using System;
+using AutoMapper;
 
 namespace Clean.Application.Test;
 
@@ -11,11 +12,12 @@ public class PersonServiceTests
 {
     private readonly Mock<IPersonRepository> _mockRepo;
     private readonly PersonService _personService;
+    private readonly IMapper _mapper;
 
-    public PersonServiceTests()
+    public PersonServiceTests(IMapper mapper)
     {
         _mockRepo = new Mock<IPersonRepository>();
-        _personService = new PersonService(_mockRepo.Object );
+        _personService = new PersonService(_mockRepo.Object, mapper);
     }
 
     [Fact]

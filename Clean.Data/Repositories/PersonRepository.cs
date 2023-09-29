@@ -39,12 +39,8 @@ public class PersonRepository : IPersonRepository
     public async Task<PersonEntity> GetById(int id) => await _context.Person.FindAsync(id);
 
     public async Task Update(PersonEntity entity)
-    {
-        var person = await GetById(entity.Id);
-        person.FirstName = entity.FirstName;
-        person.LastName = entity.LastName;
-        
-        _context.Person.Update(person);
+    {   
+        _context.Person.Update(entity);
         await _context.SaveChangesAsync();
     }
 }
