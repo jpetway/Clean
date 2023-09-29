@@ -18,4 +18,3 @@ If I were to take more time on this, what would I improve?
 3) Different DTO for create Person than Read/Update/Delete Person
 4) Adding authentication to the controller. This was supposed to be quick, but a lack of authentication on the controller is unrealistic for most implementations.
 5) Pagination to mimic a non-trivial implementation
-6) Auto Mapper vs the quick and dirty mapping.
