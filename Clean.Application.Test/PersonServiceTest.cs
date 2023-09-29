@@ -5,6 +5,8 @@ using Clean.Domain.Entities;
 using Clean.Domain.Interfaces;
 using System;
 
+namespace Clean.Application.Test;
+
 public class PersonServiceTests
 {
     private readonly Mock<IPersonRepository> _mockRepo;
