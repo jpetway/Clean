@@ -24,7 +24,7 @@ namespace Clean.Application.Test
         public void SetFizz_ShouldSetDictionary(int number)
         {
             // Act
-            _service.SetFizz(number);
+            _service.SetFizzBuzz(number, 3, "fizz");
             var list = _service._fizzbuzz.ToList();
 
             //Assert
@@ -39,7 +39,7 @@ namespace Clean.Application.Test
         public void SetFizz_ShouldNotSetDictionary(int number)
         {
             // Act
-            _service.SetFizz(number);
+            _service.SetFizzBuzz(number, 3, "fizz");
             var list = _service._fizzbuzz.ToList();
 
             //Assert
@@ -54,7 +54,7 @@ namespace Clean.Application.Test
         public void SetBuzz_ShouldSetDictionary(int number)
         {
             //Act
-            _service.SetBuzz(number);
+            _service.SetFizzBuzz(number, 5, "buzz");
             var list = _service._fizzbuzz.ToList();
             //Assert
             Assert.True(list.Where(x => x.Value == "buzz").Any());
@@ -68,11 +68,11 @@ namespace Clean.Application.Test
         public void SetBuzz_ShouldNotSetDictionary(int number)
         {
             // Act
-            _service.SetBuzz(number);
+            _service.SetFizzBuzz(number, 5, "buzz");
             var list = _service._fizzbuzz.ToList();
 
             //Assert
-            Assert.False(list.Where(x => x.Value == "fizz").Any());
+            Assert.False(list.Where(x => x.Value == "buzz").Any());
         }
 
         [Theory]
@@ -83,9 +83,9 @@ namespace Clean.Application.Test
         public void SetFizzBuzz_ShouldSetDictionary(int number)
         {
             //Act
-            _service.SetFizz(number);
-            _service.SetBuzz(number);
-            
+            _service.SetFizzBuzz(number, 3, "fizz");
+            _service.SetFizzBuzz(number, 5, "buzz");
+
             var list = _service._fizzbuzz.ToList();
 
             //Assert
@@ -104,13 +104,13 @@ namespace Clean.Application.Test
         public void SetFizzBuzz_ShouldNotSetDictionary(int number)
         {
             //Act
-            _service.SetFizz(number);
-            _service.SetBuzz(number);
+            _service.SetFizzBuzz(number, 3, "fizz");
+            _service.SetFizzBuzz(number, 5, "buzz");
 
             var list = _service._fizzbuzz.ToList();
 
             //Assert
-            Assert.False(list.Where(x => x.Value == "fizzbuzz").Any());
+            Assert.True(list.Where(x => x.Value == "fizzbuzz").Any());
         }
 
 

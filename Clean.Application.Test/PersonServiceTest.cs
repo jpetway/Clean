@@ -20,8 +20,8 @@ public class PersonServiceTests
     public async Task GetByIdAsync_ShouldReturnPerson()
     {
         // Arrange
-        var person = new PersonEntity { Id = 1, FirstName = "John", LastName = "Doe" };
-        _mockRepo.Setup(repo => repo.GetById(1)).Returns(person);
+        var person = new PersonEntity { Id = 1, FirstName = "John", LastName = "Doe", IsDeleted = false };
+        _mockRepo.SetupGet(repo => repo.GetById(1)).Returns(Task.FromResult(person));
 
         // Act
         var result = await _personService.GetByIdAsync(1);
@@ -35,7 +35,7 @@ public class PersonServiceTests
     public async Task GetByIdAsync_ShouldFail()
     {
         // Arrange
-        _mockRepo.Setup(repo => repo.GetById(999)).Returns((PersonEntity)null);
+        _mockRepo.SetupGet(repo => repo.GetById(999)).Returns(Task.FromResult((PersonEntity)null));
 
         // Act & Assert
         await Assert.ThrowsAsync<NullReferenceException>(() => _personService.GetByIdAsync(999));
