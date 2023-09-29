@@ -15,18 +15,14 @@ public class FizzBuzzService : IFizzBuzzService
     {
         for (int i = 1; i <= 100; i++)
         {
-            SetFizz(i);
-            SetBuzz(i);
+            SetFizzBuzz(i, 3, "fizz");
+            SetFizzBuzz(i, 5, "buzz");
         }
         return _fizzbuzz;
     }
-    public void SetFizz(int number)
+    public void SetFizzBuzz(int number, int divisbleBy, string fizzBuzz)
     {
-        if (IsDivisibleByX(3,number)) LoadFizzBuzz(number, "fizz");
-    }
-    public void SetBuzz(int number)
-    {
-        if (IsDivisibleByX(5, number)) LoadFizzBuzz(number, "buzz");
+        if (IsDivisibleByX(divisbleBy,number)) LoadFizzBuzz(number, fizzBuzz);
     }
     public static bool IsDivisibleByX(int divisible, int number)
     {
